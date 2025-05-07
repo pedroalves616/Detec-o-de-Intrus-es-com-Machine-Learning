@@ -1,96 +1,108 @@
-Relatório: Detecção de Intrusões com Machine Learning
-1. Dados Utilizados
-Utilizei o dataset “Network Intrusion Detection” do Kaggle, que contém registros de conexões de rede classificadas como “normal” ou “anomaly” (intrusão).
-Os arquivos utilizados foram:
+# 🛡️ Detecção de Intrusões com Machine Learning
 
-Train_data.csv
+Projeto de classificação de conexões de rede como normais ou intrusivas utilizando aprendizado de máquina supervisionado.
 
-Test_data.csv
+---
 
-2. Pré-processamento
-Para preparar os dados, realizei os seguintes passos:
+## 📁 1. Dados Utilizados
 
-✅ Remoção de valores nulos.
+Utilizei o dataset **Network Intrusion Detection** do [Kaggle]([https://www.kaggle.com/](https://www.kaggle.com/datasets/sampadab17/network-intrusion-detection) contendo registros de conexões classificados como:
 
-✅ Codificação de variáveis categóricas:
+- `normal`
+- `anomaly` (intrusão)
 
-protocol_type, service e flag foram convertidas com One-Hot Encoding.
+Arquivos utilizados:
+- `Train_data.csv`
+- `Test_data.csv`
 
-✅ Separação entre treino e teste após a codificação.
+---
 
-✅ Mapeamento da variável-alvo:
+## ⚙️ 2. Pré-processamento
 
-normal → 0
+Etapas realizadas para preparar os dados:
 
-anomaly → 1
+- 🔹 Remoção de valores nulos
+- 🔹 Codificação de variáveis categóricas com **One-Hot Encoding**:
+  - `protocol_type`, `service`, `flag`
+- 🔹 Mapeamento da variável alvo:
+  - `normal` → `0`
+  - `anomaly` → `1`
+- 🔹 Normalização com `StandardScaler`
+- 🔹 Separação entre treino e teste
 
-✅ Normalização dos dados com StandardScaler.
+---
 
-3. Modelo Escolhido
-Utilizei o modelo Random Forest, conhecido por sua capacidade de lidar com conjuntos de dados tabulares e mistos.
+## 🤖 3. Modelo Escolhido
 
-Divisão dos dados:
+O modelo utilizado foi o **Random Forest**, ideal para dados tabulares com variáveis mistas.
 
-80% para treino
+- 📊 Divisão dos dados:
+  - `80%` treino
+  - `20%` validação (`train_test_split`)
 
-20% para validação, usando train_test_split.
+---
 
-4. Resultados da Classificação
-Acurácia: 99.74%
+## ✅ 4. Resultados da Classificação
 
-Matriz de Confusão:
-Previsto Normal	Previsto Anomaly
-Real Normal	2670	4 (falso positivo)
-Real Anomaly	9 (falso negativo)	2356
+- **Acurácia**: `99,74%`
 
-📌 O modelo foi altamente eficaz, com poucos erros críticos, o que é essencial para aplicações de segurança.
+### 🔍 Matriz de Confusão
 
-5. Curva ROC e AUC
-A Curva ROC (Receiver Operating Characteristic) avalia a capacidade do modelo de distinguir entre as classes, comparando:
+|                        | Previsto: Normal | Previsto: Anomaly      |
+|------------------------|------------------|-------------------------|
+| **Real: Normal**       | 2670             | 4 *(falsos positivos)*  |
+| **Real: Anomaly**      | 9 *(falsos negativos)* | 2356          |
 
-✅ Taxa de Verdadeiros Positivos (sensibilidade)
+📌 O modelo apresentou desempenho excelente com pouquíssimos erros críticos.
 
-❌ Taxa de Falsos Positivos
+---
 
-A métrica AUC (Área sob a curva) resume essa performance:
+## 📈 5. Curva ROC e AUC
 
-AUC ≈ 1.0: modelo excelente
+A **curva ROC** avalia a performance classificatória comparando:
 
-AUC ≈ 0.5: modelo aleatório
+- Taxa de Verdadeiros Positivos (Sensibilidade)
+- Taxa de Falsos Positivos
 
-📈 Neste projeto, o Random Forest obteve um AUC muito próximo de 1, indicando que o modelo consegue separar muito bem conexões normais de intrusivas.
+**AUC (Área sob a curva):**
 
-6. Top 10 Features Mais Importantes
-O modelo identificou as seguintes variáveis como mais influentes:
+- `AUC ≈ 1.0` → modelo excelente  
+- `AUC ≈ 0.5` → modelo aleatório
 
-dst_bytes
+✨ O modelo obteve um **AUC próximo de 1**, demonstrando excelente separação entre classes.
 
-src_bytes
+---
 
-dst_host_srv_count
+## 🧠 6. Top 10 Features Mais Importantes
 
-flag_SF
+As variáveis mais relevantes segundo o Random Forest:
 
-dst_host_diff_srv_rate
+1. `dst_bytes`
+2. `src_bytes`
+3. `dst_host_srv_count`
+4. `flag_SF`
+5. `dst_host_diff_srv_rate`
+6. `same_srv_rate`
+7. `dst_host_srv_serror_rate`
+8. `count`
+9. `dst_host_same_srv_rate`
+10. `diff_srv_rate`
 
-same_srv_rate
+Essas features estão relacionadas ao volume e padrão de tráfego — essenciais para detectar intrusões.
 
-dst_host_srv_serror_rate
+---
 
-count
+## 🎓 7. Conclusão e Aprendizados
 
-dst_host_same_srv_rate
+Este projeto demonstrou que modelos supervisionados como o **Random Forest** são altamente eficazes para **detecção de intrusões em redes**.
 
-diff_srv_rate
+### 📌 Principais aprendizados:
 
-Essas variáveis envolvem padrões de tráfego, volume de dados e comportamento da conexão — todos relevantes para detectar ataques.
+- Importância do **pré-processamento dos dados**
+- Interpretação de **métricas de avaliação** como acurácia, matriz de confusão e AUC
+- Capacidade de **identificar as variáveis mais importantes** para o modelo
 
-7. Conclusão e Aprendizados
-Este projeto demonstrou como modelos supervisionados, como o Random Forest, podem ser altamente eficazes na detecção de intrusões de rede.
+---
 
-💡 Aprendizados principais:
-A importância da preparação de dados (codificação e normalização).
+> Desenvolvido com 💻 por [Seu Nome Aqui]
 
-Como interpretar métricas de desempenho como acurácia, matriz de confusão e AUC.
-
-Como extrair e interpretar as features mais relevantes para o modelo.
