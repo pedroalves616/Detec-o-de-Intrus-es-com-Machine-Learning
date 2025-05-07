@@ -104,5 +104,5 @@ Este projeto demonstrou que modelos supervisionados como o **Random Forest** sã
 
 ---
 
-> Desenvolvido com 💻 por [Seu Nome Aqui]
+> Desenvolvido com 💻 por [Pedro Alves]
 
